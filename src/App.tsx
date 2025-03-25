@@ -1,7 +1,7 @@
 // 以下のサイトを参考に作成
 // https://qiita.com/Sicut_study/items/d3ef6d1347515c65a713
 
-import { Flex } from "@radix-ui/themes";
+import { Flex, Heading } from "@radix-ui/themes";
 import SideMenu from "./SideMenu";
 import MainMenu from "./MainMenu";
 import { useEffect, useState } from "react";
@@ -62,10 +62,10 @@ export default function App() {
     console.log(data);
   };
 
-  const handleNewNote = async () => {
+  const handleNewNote = async (noteName:string) => {
     const { data, error } = await supabase
       .from("note")
-      .insert({ title: "新規ノート", content: "" });
+      .insert({ title: noteName, content: "" });
     if (error || data) {
       console.error(error);
       return;
@@ -73,6 +73,18 @@ export default function App() {
 
     fetchNotes();
   }; // 追加
+
+  const handleDeleteNote = async () =>  {
+    const { data, error } = await supabase
+    .from("note")
+    .delete().eq("id",currentNoteId)
+  if (error || data) {
+    console.error(error);
+    return;
+  }
+  setCurrentNoteId(null);
+  fetchNotes();
+  };
 
   const handleContentChange = useDebouncedCallback(async (content) => {
     const { error } = await supabase
@@ -104,14 +116,21 @@ export default function App() {
         onSelect={(note) => setCurrentNoteId(note.id)}
         localTitle={localTitle}
       />
-      <MainMenu
-        localContent={localContent}
-        localTitle={localTitle}
-        content={notes.find((note) => note.id === currentNoteId)?.content || ""}
-        title={notes.find((note) => note.id === currentNoteId)?.title || ""}
-        onContentChange={handleLocalContentChange}
-        onTitleChange={handleLocalTitleChange}
-      />
+      {currentNoteId ? 
+            <MainMenu
+            localContent={localContent}
+            localTitle={localTitle}
+            content={notes.find((note) => note.id === currentNoteId)?.content || ""}
+            title={notes.find((note) => note.id === currentNoteId)?.title || ""}
+            onContentChange={handleLocalContentChange}
+            onTitleChange={handleLocalTitleChange}
+            onDeleteNote={handleDeleteNote}
+          />
+          :
+          <Flex height="100vh" justify="center" align="center" width="calc(100% - 350px)">
+            <Heading className="page-title">Welcome to Note-App!</Heading>
+          </Flex>
+    }
     </Flex>
   );
 }

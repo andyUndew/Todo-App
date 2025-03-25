@@ -1,12 +1,5 @@
-import {
-  Section,
-  Heading,
-  Box,
-  Flex,
-  // TextArea,
-  Button,
-} from "@radix-ui/themes";
-
+import { Section, Heading, Box, Flex, Button } from "@radix-ui/themes";
+import { Dialog } from "radix-ui";
 import "./MainMenu.scss";
 import { useState } from "react";
 import SimpleMDE from "react-simplemde-editor";
@@ -23,6 +16,7 @@ interface Props {
   localTitle: string;
   onContentChange: (e: string) => void;
   onTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDeleteNote:() => void;
 }
 
 export default function MainMenu({
@@ -32,6 +26,7 @@ export default function MainMenu({
   localTitle,
   onContentChange,
   onTitleChange,
+  onDeleteNote
 }: Props) {
   const [previewMode, setPreviewMode] = useState<boolean>(true);
 
@@ -66,9 +61,36 @@ export default function MainMenu({
               title
             )}
           </Heading>
-          <Button onClick={() => setPreviewMode(!previewMode)}>
-            {previewMode ? "Edit" : "Preview"}
-          </Button>
+          <Flex>
+            <Button mr="2" onClick={() => setPreviewMode(!previewMode)}>
+              {previewMode ? "Edit" : "Preview"}
+            </Button>
+            <Dialog.Root>
+              <Dialog.Trigger>
+                <Button color="red">Delete</Button>
+              </Dialog.Trigger>
+              <Dialog.Portal>
+                <Dialog.Overlay className="DialogOverlay" />
+                <Dialog.Content className="DialogContent">
+                  <Dialog.Title className="DialogTitle">
+                    本当に <span className="DialogDelTitle">{localTitle}</span> を削除しますか？
+                  </Dialog.Title>
+                  <div
+                    style={{
+                      display: "flex",
+                      marginTop: 25,
+                      justifyContent: "flex-end",
+                      alignItems:"stretch"
+                    }}
+                  >
+                    <Dialog.Close asChild>
+                      <button className="Button red" onClick={onDeleteNote}>Delete Note</button>
+                    </Dialog.Close>
+                  </div>
+                </Dialog.Content>
+              </Dialog.Portal>
+            </Dialog.Root>
+          </Flex>
         </Flex>
 
         <Box>
