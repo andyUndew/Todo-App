@@ -1,0 +1,15 @@
+@import "@radix-ui/colors/gray.css";
+
+.header{
+    border-bottom:solid 1px #000;
+}
+input:focus{
+    outline:none;
+}
+svg{
+    margin-right: 10px;
+    opacity:0.2;
+}
+.menu{
+    background-color: var(--gray-3);
+}
