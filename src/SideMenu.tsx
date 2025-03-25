@@ -42,7 +42,7 @@ export default function SideMenu({
             onClick={() => onSelect(note)}
             color={selectNoteId === note.id ? "orange" : "indigo"}
           >
-            {localTitle ? localTitle : note.title}
+            {localTitle === note.title ? localTitle : note.title}
           </Button>
         ))}
       </Flex>
