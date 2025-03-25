@@ -22,7 +22,7 @@ export default function App() {
       setLocalContent(currentNote.content);
       setLocalTitle(currentNote.title);
     }
-  }, [currentNoteId, notes]); // ← notesが更新されたらローカルのcontentも更新
+  }, [currentNoteId, notes]); // ← notesが更新されたらローカルのcontent,titleも更新
 
   const handleLocalContentChange = (
     e: string

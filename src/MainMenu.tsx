@@ -79,12 +79,6 @@ export default function MainMenu({
               </ReactMarkdown>
             </div>
           ) : (
-            // <TextArea
-            //   rows="24"
-            //   variant="soft"
-            //   value={localContent}
-            //   onChange={(e) => onContentChange(e)}
-            // ></TextArea>
             <SimpleMDE
               value={localContent}
               onChange={(e) => onContentChange(e)}
