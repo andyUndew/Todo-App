@@ -1,4 +1,6 @@
-import { Heading, Flex, Button} from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
+import { Heading, Flex, Button, IconButton } from "@radix-ui/themes";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Dialog } from "radix-ui";
 import { Note } from "./Note";
 import "./MainMenu.scss";
@@ -44,6 +46,10 @@ export default function SideMenu({
         align="stretch"
         direction="column"
         height="100vh"
+        display={{
+          initial: "none",
+          md: "flex",
+        }}
       >
         <Heading as="h1" mb="6" align="center" weight="bold">
           Undew-App
@@ -105,6 +111,20 @@ export default function SideMenu({
             {localTitle === note.title ? localTitle : note.title}
           </Button>
         ))}
+      </Flex>
+      <Flex
+        position="sticky"
+        display={{
+          initial: "flex",
+          md: "none",
+        }}
+        justify="between"
+        p="4"
+      >
+        <Heading align="center">Note-App</Heading>
+        <IconButton>
+          <HamburgerMenuIcon />
+        </IconButton>
       </Flex>
     </div>
   );

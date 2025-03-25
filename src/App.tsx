@@ -108,7 +108,7 @@ export default function App() {
   }, 500); // 追加
 
   return (
-    <Flex>
+    <Flex direction={{initial:"column",md:"row"}}>
       <SideMenu
         notes={notes}
         handleNewNote={handleNewNote}
