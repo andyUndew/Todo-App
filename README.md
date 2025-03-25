@@ -1,54 +1,50 @@
-# React + TypeScript + Vite
+## アプリ概要
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+シンプルなMarkdown対応のノートアプリ。Supabase のリアルタイム機能を活用し、複数のデバイスでノートを同期できる。
 
-Currently, two official plugins are available:
+## 🛠️ 技術スタック
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **フロントエンド**: React + TypeScript + Vite
+- **バックエンド / データベース**: Supabase
+- **UI ライブラリ**: Radix UI
 
-## Expanding the ESLint configuration
+## 🏗️ アーキテクチャ
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### **Supabase のテーブル構造**
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### **noteテーブル**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| カラム名 | 型 | 説明 |
+| --- | --- | --- |
+| id | int | ノートの ID |
+| title | varchar | ノートのタイトル |
+| content | text | ノートの内容 |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔧 主要な機能と実装ポイント
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### **1. ノートの作成・更新・削除**
+
+- ユーザーが新しいノートを作成できる。
+- ノートのタイトルと内容を編集可能。
+- 削除機能も実装予定。
+
+### **2. Supabase のリアルタイム更新**
+
+- `postgres_changes` を利用して、ノートの内容を他のデバイスにリアルタイムで反映。
+- 変更があるたびに `fetchNotes()` を実行し、最新のデータを取得。
+
+### **3. Debounce を活用したスムーズな更新**
+
+- `useDebouncedCallback` を利用し、入力のたびに即時リクエストを送らないように調整。
+- `localContent` ステートを追加し、入力中のユーザー体験を向上。
+- 500ms ごとに Supabase にデータを保存する。
+
+## 🔮 今後の改善点や追加機能のアイデア
+
+- **リアルタイムテーブル生成**: ページ内でテーブルをリアルタイムに作成・編集可能にする。
+- **タグ機能の追加**: ノートをタグで分類できるようにする。
+- **Notion のような機能拡張**: ブロックエディタやページネーション機能を導入し、より柔軟な編集体験を提供。
+
+---
+
+
