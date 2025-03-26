@@ -101,18 +101,18 @@ export default function MainMenu({
         </Flex>
 
         <Box>
-          {previewMode ? (
-            <div className="markdown-body">
+          {/* {previewMode ? (
+            <div className="markdown-body"> */}
               <ReactMarkdown remarkPlugins={[remarkGfm, breaks]}>
                 {content}
               </ReactMarkdown>
-            </div>
+            {/* </div>
           ) : (
             <SimpleMDE
               value={localContent}
               onChange={(e) => onContentChange(e)}
             />
-          )}
+          )} */}
         </Box>
       </Section>
     </>
