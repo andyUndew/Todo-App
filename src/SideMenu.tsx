@@ -178,7 +178,7 @@ export default function SideMenu({
                     <CaretDownIcon className="CaretDown" aria-hidden />
                   </Button>
                 </NavigationMenu.Trigger>
-                <NavigationMenu.Content className="NavigationMenuContent" forceMount>
+                <NavigationMenu.Content className="NavigationMenuContent">
                   <Flex p="4" direction="column" align="stretch">
                     {notes.map((note) => (
                       <Button
