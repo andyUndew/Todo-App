@@ -41,7 +41,7 @@ export default function SideMenu({
       <Flex
         py="8"
         px="4"
-        position="sticky"
+        position="relative"
         width="300px"
         align="stretch"
         direction="column"
@@ -113,20 +113,25 @@ export default function SideMenu({
         ))}
       </Flex>
       <Box
-        position="sticky"
+        position="relative"
         display={{
           initial: "block",
           md: "none",
         }}
         p="4"
       >
-          <NavigationMenu.Root className="NavigationMenuRoot" data-viewport-resize="true">
-            <NavigationMenu.List className="NavigationMenuList">
-              <NavigationMenu.Item>
-                <Heading className="navHeader" align="center">Note-App</Heading>
-              </NavigationMenu.Item>
-              <NavigationMenu.Item>
-                <Flex justify="end" align="stretch">
+        <NavigationMenu.Root
+          className="NavigationMenuRoot"
+          data-viewport-resize="true"
+        >
+          <NavigationMenu.List className="NavigationMenuList">
+            <NavigationMenu.Item>
+              <Heading className="navHeader" align="center">
+                Note-App
+              </Heading>
+            </NavigationMenu.Item>
+            <NavigationMenu.Item>
+              <Flex justify="end" align="stretch">
                 <Dialog.Root>
                   <Dialog.Trigger>
                     <Button className="addButton" size="2">
@@ -178,7 +183,7 @@ export default function SideMenu({
                     <CaretDownIcon className="CaretDown" aria-hidden />
                   </Button>
                 </NavigationMenu.Trigger>
-                <NavigationMenu.Content className="NavigationMenuContent" forceMount>
+                <NavigationMenu.Content className="NavigationMenuContent">
                   <Flex p="4" direction="column" align="stretch">
                     {notes.map((note) => (
                       <Button
@@ -193,18 +198,18 @@ export default function SideMenu({
                     ))}
                   </Flex>
                 </NavigationMenu.Content>
-                </Flex>
-              </NavigationMenu.Item>
+              </Flex>
+            </NavigationMenu.Item>
 
-              <NavigationMenu.Indicator className="NavigationMenuIndicator">
-                <div className="Arrow" />
-              </NavigationMenu.Indicator>
-            </NavigationMenu.List>
+            <NavigationMenu.Indicator className="NavigationMenuIndicator">
+              <div className="Arrow" />
+            </NavigationMenu.Indicator>
+          </NavigationMenu.List>
 
-            <div className="ViewportPosition">
-              <NavigationMenu.Viewport className="NavigationMenuViewport" />
-            </div>
-          </NavigationMenu.Root>
+          <div className="ViewportPosition">
+            <NavigationMenu.Viewport className="NavigationMenuViewport" />
+          </div>
+        </NavigationMenu.Root>
       </Box>
     </div>
   );
