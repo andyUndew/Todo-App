@@ -78,7 +78,7 @@ export default function MainMenu({
               </Dialog.Trigger>
               <Dialog.Portal>
                 <Dialog.Overlay className="DialogOverlay" />
-                <Dialog.Content className="DialogContent">
+                <Dialog.Content className="DialogContent" forceMount>
                   <Dialog.Title className="DialogTitle">
                     本当に <span className="DialogDelTitle">{localTitle}</span> を削除しますか？
                   </Dialog.Title>

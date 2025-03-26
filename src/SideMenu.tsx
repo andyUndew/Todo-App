@@ -63,7 +63,7 @@ export default function SideMenu({
           </Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="DialogOverlay" />
-            <Dialog.Content className="DialogContent">
+            <Dialog.Content className="DialogContent" forceMount>
               <Dialog.Title className="DialogTitle">
                 Create New Note
               </Dialog.Title>
@@ -120,7 +120,7 @@ export default function SideMenu({
         }}
         p="4"
       >
-          <NavigationMenu.Root className="NavigationMenuRoot">
+          <NavigationMenu.Root className="NavigationMenuRoot" data-viewport-resize="true">
             <NavigationMenu.List className="NavigationMenuList">
               <NavigationMenu.Item>
                 <Heading className="navHeader" align="center">Note-App</Heading>
@@ -135,7 +135,7 @@ export default function SideMenu({
                   </Dialog.Trigger>
                   <Dialog.Portal>
                     <Dialog.Overlay className="DialogOverlay" />
-                    <Dialog.Content className="DialogContent">
+                    <Dialog.Content className="DialogContent" forceMount>
                       <Dialog.Title className="DialogTitle">
                         Create New Note
                       </Dialog.Title>
@@ -178,7 +178,7 @@ export default function SideMenu({
                     <CaretDownIcon className="CaretDown" aria-hidden />
                   </Button>
                 </NavigationMenu.Trigger>
-                <NavigationMenu.Content className="NavigationMenuContent">
+                <NavigationMenu.Content className="NavigationMenuContent" forceMount>
                   <Flex p="4" direction="column" align="stretch">
                     {notes.map((note) => (
                       <Button
