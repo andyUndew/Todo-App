@@ -73,7 +73,8 @@ export default function MainMenu({
             </Button>
             <Dialog.Root>
               <Dialog.Trigger>
-                <Button color="red"><TrashIcon/></Button>
+              <Button color="red" className="displayButton">Delete</Button>
+              <Button color="red" className="mobileButton"><TrashIcon/></Button>
               </Dialog.Trigger>
               <Dialog.Portal>
                 <Dialog.Overlay className="DialogOverlay" />

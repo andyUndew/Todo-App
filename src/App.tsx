@@ -14,7 +14,6 @@ export default function App() {
   const [currentNoteId, setCurrentNoteId] = useState<number | null>(null);
   const [localContent, setLocalContent] = useState<string>("");
   const [localTitle, setLocalTitle] = useState<string>("");
-
   // ノートが変わったらローカルステートを更新
   useEffect(() => {
     const currentNote = notes.find((note) => note.id === currentNoteId);
@@ -43,7 +42,17 @@ export default function App() {
       .channel("note")
       .on(
         "postgres_changes",
+        { event: "INSERT", schema: "public", table: "note" },
+        fetchNotes
+      )
+      .on(
+        "postgres_changes",
         { event: "UPDATE", schema: "public", table: "note" },
+        fetchNotes
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "note" },
         fetchNotes
       )
       .subscribe();
@@ -94,7 +103,6 @@ export default function App() {
     if (error) console.error("Error updating note", error);
 
     fetchNotes();
-    console.log("DB更新したよー");
   }, 500);
 
   const handleTitleChange = useDebouncedCallback(async (title) => {
