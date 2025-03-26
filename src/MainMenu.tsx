@@ -1,4 +1,4 @@
-import { Section, Heading, Box, Flex, Button,Text} from "@radix-ui/themes";
+import { Section, Heading, Box, Flex, Button} from "@radix-ui/themes";
 import { Dialog } from "radix-ui";
 import "./MainMenu.scss";
 import { useState } from "react";

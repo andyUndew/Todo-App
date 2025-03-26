@@ -1,5 +1,5 @@
 import "@radix-ui/themes/styles.css";
-import { Heading, Flex, Button, Text, Box } from "@radix-ui/themes";
+import { Heading, Flex, Button, Box } from "@radix-ui/themes";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { Dialog, NavigationMenu } from "radix-ui";
 import { Note } from "./Note";
