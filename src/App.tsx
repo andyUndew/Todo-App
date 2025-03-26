@@ -11,7 +11,7 @@ import { Note } from "./Note";
 
 export default function App() {
   const [notes, setNotes] = useState<Note[]>([]);
-  const [currentNoteId, setCurrentNoteId] = useState<number | null>(null);
+  const [currentNoteId, setCurrentNoteId] = useState<number | null>(43);
   const [localContent, setLocalContent] = useState<string>("");
   const [localTitle, setLocalTitle] = useState<string>("");
   // ノートが変わったらローカルステートを更新
