@@ -89,7 +89,9 @@ input {
 	font-size: 15px;
 	line-height: 1.5;
 }
-
+button{
+	cursor:pointer !important;
+}
 .Button {
 	display: inline-flex;
 	align-items: center;
@@ -102,7 +104,6 @@ input {
 	height: 50px;
 	user-select: none;
     width:100%;
-	cursor:pointer;
 }
 .Button:focus:not(:focus-visible) {
 	outline: 0;
