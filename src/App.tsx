@@ -1,7 +1,7 @@
 // 以下のサイトを参考に作成
 // https://qiita.com/Sicut_study/items/d3ef6d1347515c65a713
 
-import { Flex, Heading } from "@radix-ui/themes";
+import { Flex, Heading,Text} from "@radix-ui/themes";
 import SideMenu from "./SideMenu";
 import MainMenu from "./MainMenu";
 import { useEffect, useState } from "react";
@@ -127,8 +127,8 @@ export default function App() {
             onDeleteNote={handleDeleteNote}
           />
           :
-          <Flex height="100vh" justify="center" align="center" width="calc(100% - 350px)">
-            <Heading className="page-title">Welcome to Note-App!</Heading>
+          <Flex height="100vh" justify="center" align="center" width={{initial:"100%",md:"calc(100% - 350px"}}>
+            <Heading className="page-title" size="9">Welcome to <br className="md"/><Text color="cyan">Note-App!</Text></Heading>
           </Flex>
     }
     </Flex>

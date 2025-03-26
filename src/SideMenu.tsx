@@ -1,7 +1,7 @@
 import "@radix-ui/themes/styles.css";
-import { Heading, Flex, Button, IconButton } from "@radix-ui/themes";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import { Dialog } from "radix-ui";
+import { Heading, Flex, Button, Text, Box } from "@radix-ui/themes";
+import { CaretDownIcon } from "@radix-ui/react-icons";
+import { Dialog, NavigationMenu } from "radix-ui";
 import { Note } from "./Note";
 import "./MainMenu.scss";
 import { ChangeEvent, useState } from "react";
@@ -52,7 +52,7 @@ export default function SideMenu({
         }}
       >
         <Heading as="h1" mb="6" align="center" weight="bold">
-          Undew-App
+          Note-App
         </Heading>
 
         <Dialog.Root>
@@ -106,26 +106,106 @@ export default function SideMenu({
             size="2"
             mb="4"
             onClick={() => onSelect(note)}
-            color={selectNoteId === note.id ? "orange" : "indigo"}
+            color={selectNoteId === note.id ? "orange" : "cyan"}
           >
             {localTitle === note.title ? localTitle : note.title}
           </Button>
         ))}
       </Flex>
-      <Flex
+      <Box
         position="sticky"
         display={{
-          initial: "flex",
+          initial: "block",
           md: "none",
         }}
-        justify="between"
         p="4"
       >
-        <Heading align="center">Note-App</Heading>
-        <IconButton>
-          <HamburgerMenuIcon />
-        </IconButton>
-      </Flex>
+          <NavigationMenu.Root className="NavigationMenuRoot">
+            <NavigationMenu.List className="NavigationMenuList">
+              <NavigationMenu.Item>
+                <Heading className="navHeader" align="center">Note-App</Heading>
+              </NavigationMenu.Item>
+              <NavigationMenu.Item>
+                <Flex justify="end" align="stretch">
+                <Dialog.Root>
+                  <Dialog.Trigger>
+                    <Button className="addButton" size="2">
+                      +
+                    </Button>
+                  </Dialog.Trigger>
+                  <Dialog.Portal>
+                    <Dialog.Overlay className="DialogOverlay" />
+                    <Dialog.Content className="DialogContent">
+                      <Dialog.Title className="DialogTitle">
+                        Create New Note
+                      </Dialog.Title>
+                      <fieldset className="Fieldset">
+                        <input
+                          className="Input"
+                          id="name"
+                          placeholder="Note Name"
+                          value={noteName}
+                          onChange={(e) => handleNoteChange(e)}
+                        />
+                      </fieldset>
+                      <Dialog.Description>
+                        <span className="errTxt">{errTxt}</span>
+                      </Dialog.Description>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginTop: 25,
+                          justifyContent: "flex-end",
+                          alignItems: "stretch",
+                        }}
+                      >
+                        <Dialog.Close asChild>
+                          <button
+                            className="Button green"
+                            disabled={disable}
+                            onClick={() => handleNewNote(noteName)}
+                          >
+                            Add Note
+                          </button>
+                        </Dialog.Close>
+                      </div>
+                    </Dialog.Content>
+                  </Dialog.Portal>
+                </Dialog.Root>
+                <NavigationMenu.Trigger className="NavigationMenuTrigger">
+                  <Button>
+                    ノートを選択{" "}
+                    <CaretDownIcon className="CaretDown" aria-hidden />
+                  </Button>
+                </NavigationMenu.Trigger>
+                <NavigationMenu.Content className="NavigationMenuContent">
+                  <Flex p="4" direction="column" align="stretch">
+                    {notes.map((note) => (
+                      <Button
+                        key={note.id}
+                        size="2"
+                        mb="4"
+                        onClick={() => onSelect(note)}
+                        color={selectNoteId === note.id ? "orange" : "cyan"}
+                      >
+                        {localTitle === note.title ? localTitle : note.title}
+                      </Button>
+                    ))}
+                  </Flex>
+                </NavigationMenu.Content>
+                </Flex>
+              </NavigationMenu.Item>
+
+              <NavigationMenu.Indicator className="NavigationMenuIndicator">
+                <div className="Arrow" />
+              </NavigationMenu.Indicator>
+            </NavigationMenu.List>
+
+            <div className="ViewportPosition">
+              <NavigationMenu.Viewport className="NavigationMenuViewport" />
+            </div>
+          </NavigationMenu.Root>
+      </Box>
     </div>
   );
 }
