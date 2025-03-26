@@ -2,7 +2,7 @@ import { Section, Heading, Box, Flex, Button} from "@radix-ui/themes";
 import { Dialog } from "radix-ui";
 import "./MainMenu.scss";
 import { useState } from "react";
-import SimpleMDE from "react-simplemde-editor";
+// import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -23,9 +23,9 @@ interface Props {
 export default function MainMenu({
   title,
   content,
-  localContent,
+  // localContent,
   localTitle,
-  onContentChange,
+  // onContentChange,
   onTitleChange,
   onDeleteNote
 }: Props) {
